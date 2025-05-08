@@ -4,9 +4,10 @@ import BubbleChatFromSystem from "@/components/BubbleChatFromSystem";
 import BubbleChatFromUser from "@/components/BubbleChatFromUser";
 import { Input } from "@/components/ui/input";
 import { Button } from "./ui/button";
-import { Send } from "lucide-react";
+import { RefreshCcw, Send } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import BubbleChatLoadingFromSystem from "./BubbleChatLoadingFromSystem";
+import { ModeToggle } from "./mode-toggle";
 
 interface BubbleChatInterface {
   text: string;
@@ -51,16 +52,19 @@ export default function Chat() {
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
     try {
-      const response = await fetch("http://127.0.0.1:5000/search", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          query: userInput,
-          count: 10,
-        }),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/search`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            query: userInput,
+            count: 10,
+          }),
+        }
+      );
 
       const data = await response.json();
 
@@ -96,6 +100,28 @@ export default function Chat() {
 
   return (
     <div>
+      <div className="top-0 right-0 left-0 fixed flex justify-between items-center bg-background/80 px-8 py-4 w-full">
+        <h1 className="font-semibold text-gray-500 dark:text-white text-xl">
+          Tune Trace
+        </h1>
+        <div className="flex items-center gap-2">
+          <Button
+            variant={"outline"}
+            onClick={() =>
+              setBubbleChats([
+                {
+                  text: "Welcome to Tune Trace! Please ask me anything about music.",
+                  type: "system",
+                },
+              ])
+            }
+            className="hover:cursor-pointer"
+          >
+            <RefreshCcw />
+          </Button>
+          <ModeToggle />
+        </div>
+      </div>
       <div className="space-y-4 px-8 md:px-16 lg:px-32 xl:px-48 pt-16 pb-24">
         {bubbleChats.map((chat, index) =>
           chat.type === "user" ? (

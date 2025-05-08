@@ -23,10 +23,18 @@ export default function BubbleChatFromSystem({
 
   return (
     <div className="flex justify-start py-2 w-full">
-      <div className="bg-gray-200 px-4 py-2 rounded-lg rounded-bl-none">
-        {title && <p className="font-bold text-black">Title: {title}</p>}
-        {artist && <p className="font-semibold text-black">Artist: {artist}</p>}
-        <p className="text-black">{parsedText}</p>
+      <div className="bg-secondary px-4 py-2 rounded-lg rounded-bl-none">
+        {title && (
+          <p className="font-bold text-black dark:text-slate-200">
+            Title: {title}
+          </p>
+        )}
+        {artist && (
+          <p className="font-semibold text-black dark:text-slate-200">
+            Artist: {artist}
+          </p>
+        )}
+        <p className="text-black dark:text-slate-200">{parsedText}</p>
       </div>
     </div>
   );
