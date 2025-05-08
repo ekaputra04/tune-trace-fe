@@ -1,15 +1,13 @@
-import BubbleChatFromSystem from "@/components/BubbleChatFromSystem";
-import BubbleChatFromUser from "@/components/BubbleChatFromUser";
+import Chat from "@/components/Chat";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { RefreshCcw } from "lucide-react";
-import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="">
-      <div className="flex justify-between items-center p-8">
-        <h1 className="font-semibold text-gray-500 dark:text-white text-3xl">
+    <div className="max-h-screen">
+      <div className="top-0 right-0 left-0 fixed flex justify-between items-center bg-background/80 px-8 py-4 w-full">
+        <h1 className="font-semibold text-gray-500 dark:text-white text-xl">
           Tune Trace
         </h1>
         <div className="flex items-center gap-2">
@@ -19,12 +17,7 @@ export default function Home() {
           <ModeToggle />
         </div>
       </div>
-      <div className="px-8 md:px-16 lg:px-32 xl:px-48">
-        <BubbleChatFromUser text="Ini dari user" />
-        <BubbleChatFromSystem text="Ini dari system" />
-        <BubbleChatFromUser text="Ini dari user 2" />
-        <BubbleChatFromSystem text="Ini dari system 2" />
-      </div>
+      <Chat />
     </div>
   );
 }
